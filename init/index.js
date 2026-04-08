@@ -1,28 +1,28 @@
+if (process.env.NODE_ENV != 'production') {
+    require('dotenv').config({ path: "../.env" });
+};
+
 const mongoose = require('mongoose');
 const initData = require('./data.js');
 const Listing = require('../models/listing.js');
-const { object } = require('joi');
 
-// Connect to MongoDB
-const mongoURL = "mongodb://127.0.0.1:27017/wanderlust";
-
-main().then(() => {
-    console.log("Connected to MongoDB");
-}).catch(err => {
-    console.error("Error connecting to MongoDB:", err);
-});
+const dbUrl = process.env.ATLASDB_URL;
 
 async function main(){
-    await mongoose.connect(mongoURL); 
+    await mongoose.connect(dbUrl);
+    console.log("Connected to MongoDB");
 }
 
-const initDB = async () => {
+const initDB = async () => { 
     try {
-        // Clear existing listings
         await Listing.deleteMany({});
         console.log("Cleared existing listings.");
-        initData.data = initData.data.map((obj) => ({...obj, owner: '69cb9ae26329651048232ef9'}));  
-        // Insert new listings from data.js
+
+        initData.data = initData.data.map((obj) => ({
+            ...obj,
+            owner: '69d0f1d23fb0dc30e663c0ac'
+        }));
+
         await Listing.insertMany(initData.data);
         console.log("Database initialized with data.");
     } catch (err) {
@@ -32,4 +32,4 @@ const initDB = async () => {
     }
 };
 
-initDB();
+main().then(initDB);

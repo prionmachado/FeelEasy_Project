@@ -3,7 +3,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-}
+} 
 
 .container {
     flex: 1;
@@ -13,6 +13,7 @@ body {
 .navbar {
     height: 5rem;
     background-color: aliceblue;
+    z-index: 1000;
 }
 
 .fa-compass {
@@ -45,41 +46,83 @@ body {
     border-radius: 25px;
     padding: 0.5rem 3rem 0.5rem 3rem;
     font-size: 1rem;
-}
+} 
+
+@media (max-width: 768px) {
+  .navbar-collapse {
+    background-color: white;
+    padding: 10px;
+    border-top: 1.75px solid #ddd;
+  }
+} 
 
 /* footer  */
-.f-info-links a {
-    text-decoration: none;
-    color: #222222;
+/* Footer container */
+.footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #e0e0e0;
 }
 
-.f-info-links a:hover {
+/* Headings */
+.footer h5,
+.footer h6 {
+    color: #222;
+}
+
+/* Paragraph text */
+.footer p {
+    font-size: 0.95rem;
+    color: #666;
+}
+
+/* Links */
+.footer-link {
+    text-decoration: none;
+    color: #555;
+    transition: 0.2s ease;
+}
+
+.footer-link:hover {
+    color: #000;
     text-decoration: underline;
 }
 
-.f-info-links,
-.f-info-socials,
-.f-info-brand {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* List spacing */
+.footer ul li {
+    margin-bottom: 0.4rem;
 }
 
-.f-info-socials i {
-    margin-right: 1rem;
-    font-size: 1.3rem;
+/* Social icons */
+.footer i {
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
 }
 
-.f-info {
-    text-align: center;
-    height: 8rem;
-    background-color: #ebebeb;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: space-evenly;
+.footer i:hover {
+    transform: scale(1.2);
+    color: #000;
 }
+
+/* Divider */
+.footer hr {
+    margin: 1.5rem 0;
+}
+
+/* Bottom section */
+.footer .small {
+    font-size: 0.85rem;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    .footer {
+        text-align: center;
+    }
+
+    .footer .text-md-end {
+        text-align: center !important;
+    }
+} 
 
 /* Cards */
 .listing-card {
@@ -129,7 +172,7 @@ body {
 
 /* Show page  */
 .show-img {
-    height: 30vh;
+    height: 50vh;
 }
 
 .show-card {
@@ -141,6 +184,4 @@ body {
 #map {
     height: 400px;
     width: 80vh;
-}
-
-;
+} 

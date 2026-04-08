@@ -24,10 +24,10 @@ const userRouter = require('./routes/user.js');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views')); 
 app.use(methodOverride('_method'));
 app.engine('ejs', ejsMate);
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'))); 
 
 // Connect to MongoDB
 const dbUrl = process.env.ATLASDB_URL;
@@ -47,7 +47,7 @@ const store = MongoStore.create({
     crypto: {
         secret: process.env.SECRET
     },
-    touchAfter: 24 * 60 * 60 // time period in seconds
+    touchAfter: 24 * 60 * 60
 });
 
 store.on("error", (err) => {
@@ -91,6 +91,11 @@ app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);  // id is only accessible in app.js so in review model the method is not working that's why we are using mergeParams in review.js to access the id from app.js
 // Use user routes
 app.use("/", userRouter);
+
+// Redirect root to /listings
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
 
 // 404 handler
 app.use((req, res, next) => {

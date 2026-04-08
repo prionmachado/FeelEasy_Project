@@ -5,10 +5,26 @@ const cloudinary = require('../cloudConfig.js');
 // const mapToken = process.env.MAP_TOKEN;
 // const geocodingClient = mbxGeocoding({ accessToken: mapToken });
 
-// Controller function for listing index route
+// Controller function for listing index route and filtering listings by category
 module.exports.index = async (req, res) => {
-    const allListings = await Listing.find({});
-    res.render('listings/index.ejs', { allListings });
+    let { category, search } = req.query;
+    let query = {};
+
+    // category filter
+    if (category) {
+        query.category = category;
+    }
+
+    // search filter (title + location)
+    if (search) {
+        query.$or = [
+            { title: { $regex: search, $options: "i" } },
+            { location: { $regex: search, $options: "i" } },
+            { country: { $regex: search, $options: "i" } }
+        ];
+    }
+    const allListings = await Listing.find(query);
+    res.render("listings/index.ejs", { allListings });
 };
 
 // Controller function for rendering new listing form
@@ -59,6 +75,11 @@ module.exports.createListing = async (req, res, next) => {
             filename: result.public_id
         };
     }
+    // TEMP default coordinates (Mumbai example)
+    // newListing.geometry = {
+    //     type: "Point",
+    //     coordinates: [72.8777, 19.0760] // [lng, lat]
+    // };
     // newListing.geometry = response.body.features[0].geometry;
     await newListing.save();
     req.flash('success', 'New Listing Created Successfully!');
@@ -119,4 +140,4 @@ module.exports.destroyListing = async (req, res) => {
     await Listing.findByIdAndDelete(id);
     req.flash('success', 'Listing Deleted Successfully!');
     res.redirect('/listings');
-};
+}; 

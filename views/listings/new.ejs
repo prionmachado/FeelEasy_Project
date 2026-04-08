@@ -5,10 +5,12 @@
             <div class="col-8 offset-2">
                 <br><br>
                 <h2>Create a New Listing</h2>
-                <form action="/listings" method="post" novalidate class="needs-validation" enctype="multipart/form-data">
+                <form action="/listings" method="post" novalidate class="needs-validation"
+                    enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="title" class="form-label">Title:</label>
-                        <input type="text" name="listing[title]" class="form-control" placeholder="Add a cachy title" required>
+                        <input type="text" name="listing[title]" class="form-control" placeholder="Add a cachy title"
+                            required>
                         <div class="valid-feedback">Title looks good!!</div>
                         <div class="invalid-feedback">Title should be valid</div>
                     </div>
@@ -29,14 +31,16 @@
                     <div class="row">
                         <div class="mb-3 col-md-4">
                             <label for="price" class="form-label">Price (INR):</label>
-                            <input type="number" name="listing[price]" class="form-control" placeholder="eg: 1200" required>
+                            <input type="number" name="listing[price]" class="form-control" placeholder="eg: 1200"
+                                required>
                             <div class="invalid-feedback">Price should be valid</div>
                             <div class="valid-feedback">Price looks good!!</div>
                         </div>
 
                         <div class="mb-3 col-md-8">
                             <label for="country" class="form-label">Country:</label>
-                            <input type="text" name="listing[country]" class="form-control" placeholder="eg: India" required>
+                            <input type="text" name="listing[country]" class="form-control" placeholder="eg: India"
+                                required>
                             <div class="invalid-feedback">Country should be valid</div>
                             <div class="valid-feedback">Valid country!!</div>
                         </div>
@@ -44,11 +48,25 @@
 
                     <div class="mb-3">
                         <label for="location" class="form-label">Location:</label>
-                        <input type="text" name="listing[location]" class="form-control" placeholder="eg: Jaipur, Rajasthan"
-                            required>
+                        <input type="text" name="listing[location]" class="form-control"
+                            placeholder="eg: Jaipur, Rajasthan" required>
                         <div class="invalid-feedback">Location should be valid</div>
                         <div class="valid-feedback">Valid Location!!</div>
                     </div>
+
+                    <label for="category">Category</label>
+                    <select name="listing[category]" class="form-control" required>
+                        <option value="rooms">Rooms</option>
+                        <option value="iconic-cities">Iconic Cities</option>
+                        <option value="mountains">Mountains</option>
+                        <option value="castles">Castles</option>
+                        <option value="pools">Amazing Pools</option>
+                        <option value="camping">Camping</option>
+                        <option value="farms">Farms</option>
+                        <option value="arctic">Arctic</option>
+                        <option value="domes">Domes</option>
+                        <option value="boats">Boats</option>
+                    </select>
 
                     <button class="btn btn-dark add-btn mt-3">Add</button>
                     <br><br>
