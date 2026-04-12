@@ -15,7 +15,7 @@ module.exports.index = async (req, res) => {
         query.category = category;
     }
 
-    // search filter (title + location)
+    // search filter
     if (search) {
         query.$or = [
             { title: { $regex: search, $options: "i" } },
