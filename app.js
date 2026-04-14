@@ -79,8 +79,8 @@ passport.deserializeUser(User.deserializeUser());
 
 // middleware to set flash messages in res.locals for access in all views
 app.use((req, res, next) => {
-    res.locals.success = req.flash('success');
-    res.locals.error = req.flash('error');
+    res.locals.success = req.flash('success'); // Make success flash messages available in all views
+    res.locals.error = req.flash('error'); // Make error flash messages available in all views
     res.locals.currentUser = req.user; // Make the current user available in all views
     next();
 });
