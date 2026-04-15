@@ -1,100 +1,103 @@
 <% layout('layouts/boilerplate') %>
 
-    <body>
-        <div class="top-bar d-flex align-items-center justify-content-between">
-            <div class="filter-wrapper">
-                <button class="scroll-btn left" id="scrollLeft">
-                    <i class="fa-solid fa-chevron-left"></i>
-                </button>
+<div class="top-bar">
+    <div class="filter-wrapper">
+        <button class="scroll-btn left" id="scrollLeft">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
 
-                <div id="filters">
-                    <div class="filter" data-category="trending">
-                        <div><i class="fa-solid fa-fire"></i></div>
-                        <p>Trending</p>
-                    </div>
-                    <div class="filter" data-category="rooms">
-                        <div><i class="fa-solid fa-bed"></i></div>
-                        <p>Rooms</p>
-                    </div>
-                    <div class="filter" data-category="iconic-cities">
-                        <div><i class="fa-solid fa-mountain-city"></i></div>
-                        <p>Iconic Cities</p>
-                    </div>
-                    <div class="filter" data-category="mountains">
-                        <div><i class="fa-solid fa-mountain"></i></div>
-                        <p>Mountains</p>
-                    </div>
-                    <div class="filter" data-category="castles">
-                        <div><i class="fa-brands fa-fort-awesome"></i></div>
-                        <p>Castles</p>
-                    </div>
-                    <div class="filter" data-category="pools">
-                        <div><i class="fa-solid fa-person-swimming"></i></div>
-                        <p>Amazing Pools</p>
-                    </div>
-                    <div class="filter" data-category="camping">
-                        <div><i class="fa-solid fa-campground"></i></div>
-                        <p>Camping</p>
-                    </div>
-                    <div class="filter" data-category="farms">
-                        <div><i class="fa-solid fa-cow"></i></div>
-                        <p>Farms</p>
-                    </div>
-                    <div class="filter" data-category="arctic">
-                        <div><i class="fa-regular fa-snowflake"></i></div>
-                        <p>Arctic</p>
-                    </div>
-                    <div class="filter" data-category="domes">
-                        <div><i class="fa-solid fa-igloo"></i></div>
-                        <p>Domes</p>
-                    </div>
-                    <div class="filter" data-category="boats">
-                        <div><i class="fa-solid fa-ship"></i></div>
-                        <p>Boats</p>
-                    </div>
-                </div>
-                <button class="scroll-btn right" id="scrollRight">
-                    <i class="fa-solid fa-chevron-right"></i>
-                </button>
+        <div id="filters">
+            <div class="filter" data-category="trending">
+                <i class="fa-solid fa-fire"></i>
+                <p>Trending</p>
             </div>
-
-            <div class="tax-toggle">
-                <div class="form-check-reverse form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
-                </div>
+            <div class="filter" data-category="rooms">
+                <i class="fa-solid fa-bed"></i>
+                <p>Rooms</p>
+            </div>
+            <div class="filter" data-category="iconic-cities">
+                <i class="fa-solid fa-mountain-city"></i>
+                <p>Iconic Cities</p>
+            </div>
+            <div class="filter" data-category="mountains">
+                <i class="fa-solid fa-mountain"></i>
+                <p>Mountains</p>
+            </div>
+            <div class="filter" data-category="castles">
+                <i class="fa-brands fa-fort-awesome"></i>
+                <p>Castles</p>
+            </div>
+            <div class="filter" data-category="pools">
+                <i class="fa-solid fa-person-swimming"></i>
+                <p>Amazing Pools</p>
+            </div>
+            <div class="filter" data-category="camping">
+                <i class="fa-solid fa-campground"></i>
+                <p>Camping</p>
+            </div>
+            <div class="filter" data-category="farms">
+                <i class="fa-solid fa-cow"></i>
+                <p>Farms</p>
+            </div>
+            <div class="filter" data-category="arctic">
+                <i class="fa-regular fa-snowflake"></i>
+                <p>Arctic</p>
+            </div>
+            <div class="filter" data-category="domes">
+                <i class="fa-solid fa-igloo"></i>
+                <p>Domes</p>
+            </div>
+            <div class="filter" data-category="boats">
+                <i class="fa-solid fa-ship"></i>
+                <p>Boats</p>
             </div>
         </div>
+        
+        <button class="scroll-btn right" id="scrollRight">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+    </div>
 
-        <div class="row row-cols-1 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 mt-3">
-            <% if (allListings.length> 0) { %>
-                <% for (let listing of allListings) { %>
+    <div class="tax-toggle">
+        <label class="tax-label">
+            <span>Display total after taxes</span>
+            <input class="tax-checkbox" type="checkbox" id="flexSwitchCheckDefault">
+            <span class="tax-slider"></span>
+        </label>
+    </div>
+</div>
+
+<div class="container-fluid px-4">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        <% if (allListings.length> 0) { %>
+            <% for (let listing of allListings) { %>
+                <div class="col">
                     <a href="/listings/<%= listing._id %>" class="listing-link">
-                        <div class="card col listing-card">
-                            <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image"
-                                style="height: 15rem;">
-                            <div class="card-img-overlay"></div>
+                        <div class="card listing-card h-100">
+                            <div class="img-container">
+                                <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image">
+                            </div>
                             <div class="card-body">
-                                <p class="card-text" style="font-size: 0.85rem; margin-left: 0.5rem;">
-                                    <b>
-                                        <%= listing.title %>
-                                    </b> <br>
-                                    &#8377;<%= listing.price.toLocaleString("en-IN") %> for 2 nights
-                                        <i class="tax-info"> &nbsp; &nbsp; +18% GST</i>
+                                <p class="card-text fw-bold mb-0"><%= listing.title %></p>
+                                <p class="card-text text-muted small mb-0"><%= listing.location %>, <%= listing.country %></p>
+                                <p class="card-text mt-2">
+                                    <span class="fw-bold">&#8377;<%= listing.price.toLocaleString("en-IN") %></span> / night
+                                    <i class="tax-info text-muted"> +18% GST</i>
                                 </p>
                             </div>
                         </div>
                     </a>
-                    <% } %>
-                        <% } else { %>
+                </div>
+            <% } %>
+        <% } else { %>
+            <div class="col-12 d-flex flex-column justify-content-center align-items-center" style="height: 60vh; color: #555;">
+                <i class="fa-solid fa-house-chimney fa-3x mb-3"></i>
+                <h4>No listings available</h4>
+                <p class="text-center">Try searching something else or come back later.</p>
+            </div>
+        <% } %>
+    </div>
+</div>
 
-                            <div class="d-flex flex-column justify-content-center align-items-center" style="height: 60vh; width: 100%; color: #555;">
-                                <h4>No listings available 😕<br></h4>
-                                <p class="text-center">Try searching something else or<br> come back later.</p>
-                            </div>
-                            <% } %>
-        </div>
-    </body>
-
-    <script src="/js/tax.js"></script>
-    <script src="/js/filters.js"></script>
+<script src="/js/tax.js"></script>
+<script src="/js/filters.js"></script>

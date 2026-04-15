@@ -1,7 +1,13 @@
 let taxSwitch = document.getElementById('flexSwitchCheckDefault');
-taxSwitch.addEventListener('change', function () {
-    let taxInfoElements = document.querySelectorAll('.tax-info');
+let taxInfoElements = document.querySelectorAll('.tax-info');
+
+function toggleTax() {
     taxInfoElements.forEach(function (taxInfo) {
         taxInfo.style.display = taxSwitch.checked ? 'inline' : 'none';
     });
-}); 
+}
+
+if (taxSwitch) {
+    toggleTax();
+    taxSwitch.addEventListener('change', toggleTax);
+}

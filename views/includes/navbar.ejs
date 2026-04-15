@@ -1,33 +1,50 @@
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i>
+<nav class="navbar navbar-expand-md bg-light border-bottom sticky-top py-2" style="z-index: 1030;">
+  <div class="container-fluid px-4">
+    <a class="navbar-brand d-flex align-items-center text-dark text-decoration-none" href="/listings">
+      <i class="fa-solid fa-compass fa-lg text-danger"></i>
       <span class="ms-2 fw-bold">FeelEasy</span>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+    
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link" href="/listings">Explore</a>
-        <a class="nav-link" href="https://github.com/prionmachado/FeelEasy_Project" target="_blank">Github</a>
-      </div>
+    
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="/listings">Explore</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="https://github.com/prionmachado/FeelEasy_Project" target="_blank">Github</a>
+        </li>
+      </ul>
+      
+      <form class="d-flex me-3 mb-2 mb-md-0" action="/listings" method="GET">
+        <div class="input-group">
+          <input class="form-control" name="search" type="search" placeholder="Search destinations" aria-label="Search">
+          <button class="btn btn-outline-danger" type="submit">
+            <i class="fa-solid fa-search"></i>
+          </button>
+        </div>
+      </form>
 
-      <div class="navbar-nav ms-auto">
-        <form class="d-flex" action="/listings" method="GET" role="search">
-          <input class="form-control me-2 search-inp" name="search" type="search" placeholder="Search destinations">
-          <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
-        </form>
-      </div>
-
-      <div class="navbar-nav ms-auto">
-        <a class="nav-link" href="/listings/new">FeelEasy your home</a>
+      <ul class="navbar-nav mb-2 mb-md-0">
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="/listings/new">FeelEasy your home</a>
+        </li>
         <% if(currentUser) { %>
-          <a class="nav-link" href="/logout"><b>Log Out</b></a>
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="/logout"><b>Log out</b></a>
+          </li>
         <% } else { %>
-          <a class="nav-link" href="/signup"><b>Sign Up</b></a>
-          <a class="nav-link" href="/login"><b>Log In</b></a>
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="/signup"><b>Sign up</b></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="/login"><b>Log in</b></a>
+          </li>
         <% } %>
-      </div>
+      </ul>
     </div>
   </div>
 </nav>

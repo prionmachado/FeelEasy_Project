@@ -1,29 +1,23 @@
-// mapboxgl.accessToken = mapToken;
-// const map = new mapboxgl.Map({
-//     container: 'map', // container ID
-//     style: 'mapbox://styles/mapbox/streets-v12', // style URL
-//     center: listing.geometry.coordinates, // starting position [lng, lat]
-//     zoom: 9 // starting zoom
-// }); 
-// const marker = new mapboxgl.Marker({ color: 'red' })
-//     .setLngLat(listing.geometry.coordinates)
-//     .setPopup(new mapboxgl.Popup({ offset: 25 })
-//     .setHTML(`<h3>${listing.title}</h3><p>${listing.location}</p>`))
-//     .addTo(map);
+if (typeof listing === 'undefined' || !listing || !listing.geometry || !listing.geometry.coordinates) {
+    console.log('No listing data available for map');
+    const mapDiv = document.getElementById('map');
+    if (mapDiv) {
+        mapDiv.innerHTML = '<p style="padding:20px;">Map not available</p>';
+    }
+} else {
+    const coords = listing.geometry.coordinates;
+    console.log('Coordinates:', coords);
+    
+    const map = L.map('map').setView([coords[1], coords[0]], 9);
 
-// Get coordinates from listing
-// const coords = listing.geometry.coordinates; // [lng, lat]
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
 
-// // Initialize map
-// const map = L.map('map').setView([coords[1], coords[0]], 9);
-
-// // Add OpenStreetMap tiles
-// L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-//     attribution: '&copy; OpenStreetMap contributors'
-// }).addTo(map);
-
-// // Add marker
-// L.marker([coords[1], coords[0]])
-//     .addTo(map)
-//     .bindPopup(`<h3>${listing.title}</h3><p>${listing.location}</p>`)
-//     .openPopup();
+    L.marker([coords[1], coords[0]])
+        .addTo(map)
+        .bindPopup(`<h3>${listing.title}</h3><p>${listing.location}</p>`)
+        .openPopup();
+        
+    console.log('Map initialized successfully');
+}

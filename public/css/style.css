@@ -3,10 +3,12 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    overflow-x: hidden;
 } 
 
-.container {
+.container, .container-fluid {
     flex: 1;
+    overflow-x: hidden;
 }
 
 /* navbar */
@@ -50,9 +52,29 @@ body {
 
 @media (max-width: 768px) {
   .navbar-collapse {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
     background-color: white;
-    padding: 10px;
-    border-top: 1.75px solid #ddd;
+    padding: 0.5rem;
+    border-top: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+  
+  .navbar-collapse .navbar-nav,
+  .navbar-collapse form {
+    width: 100%;
+  }
+  
+  .navbar-collapse .nav-link {
+    padding: 0.4rem 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .navbar-collapse .input-group {
+    width: 100%;
+    margin: 0.25rem 0;
   }
 } 
 
@@ -127,35 +149,49 @@ body {
 /* Cards */
 .listing-card {
     border: none !important;
-    margin-bottom: 2rem;
+    transition: transform 0.2s;
+    overflow: hidden;
 }
 
-.card-img-top {
+.listing-card:hover {
+    transform: scale(1.02);
+}
+
+.img-container {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.img-container img {
     border-radius: 1rem !important;
     width: 100% !important;
+    height: 15rem !important;
     object-fit: cover !important;
 }
 
 .card-body {
-    padding: 0 !important;
-}
-
-.card-text p {
-    font-weight: 400 !important;
+    padding: 0.75rem 0.25rem !important;
 }
 
 .listing-link {
     text-decoration: none;
+    color: inherit;
+    display: block;
 }
 
-/* Card effect */
-.card-img-overlay {
-    opacity: 0;
-}
-
-.card-img-overlay:hover {
-    opacity: 0.2;
-    background-color: white;
+@media (max-width: 576px) {
+    .img-container img {
+        height: 12rem !important;
+    }
+    
+    .listing-card .card-body {
+        padding: 0.5rem !important;
+    }
+    
+    .listing-card .card-text {
+        font-size: 0.85rem;
+    }
 }
 
 /* New page  */
@@ -183,5 +219,5 @@ body {
 /* map  */
 #map {
     height: 400px;
-    width: 80vh;
+    width: 100%;
 } 

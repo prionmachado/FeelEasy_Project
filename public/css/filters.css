@@ -4,7 +4,11 @@
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    flex-wrap: wrap;
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+    flex-wrap: nowrap;
+    overflow: visible;
 }
 
 /* FILTER WRAPPER */
@@ -12,21 +16,20 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    flex: 1;
-    max-width: 72%;
+    flex: 0 0 auto;
 }
 
-/* FILTERS */
+/* FILTERS CONTAINER */
 #filters {
     display: flex;
     align-items: center;
     overflow-x: auto;
     scroll-behavior: smooth;
-    gap: 1.5rem;
-    padding: 1rem 0;
-    flex: 1;
-
+    gap: 0.5rem;
+    padding: 0.5rem 0;
     scrollbar-width: none;
+    width: 690px;
+    -webkit-overflow-scrolling: touch;
 }
 
 #filters::-webkit-scrollbar {
@@ -35,67 +38,142 @@
 
 /* FILTER ITEM */
 .filter {
-    min-width: 80px;
-    flex: 0 0 auto;
-    text-align: center;
-    opacity: 0.7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.5rem;
+    min-width: 73px;
+    border: 1px solid #ddd;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
 }
 
 .filter:hover {
-    opacity: 1;
-    cursor: pointer;
+    border-color: #333;
 }
 
-/* SCROLL BUTTONS (NO absolute now) */
+.filter.active {
+    border-color: #333;
+    background-color: #f7f7f7;
+}
+
+.filter i {
+    font-size: 1rem;
+    color: #333;
+}
+
+.filter p {
+    font-size: 0.75rem;
+    margin: 0;
+    color: #333;
+    white-space: nowrap;
+}
+
+/* SCROLL BUTTONS */
 .scroll-btn {
     background: white;
     border: 1px solid #ddd;
-    font-size: 1rem;
-    padding: 0.4rem 0.6rem;
+    font-size: 0.9rem;
+    padding: 0.5rem;
     cursor: pointer;
     border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.scroll-btn:hover {
+    background: #f5f5f5;
 }
 
 /* TAX TOGGLE */
 .tax-toggle {
-    border: 1px solid black;
-    border-radius: 1rem;
-    height: 3.25rem;
-    padding: 0 1rem;
     display: flex;
     align-items: center;
     white-space: nowrap;
 }
 
+.tax-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid #555;
+    border-radius: 2rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #222;
+    background: white;
+}
+
+.tax-label:hover {
+    border-color: #222;
+}
+
+.tax-checkbox {
+    display: none;
+}
+
+.tax-slider {
+    position: relative;
+    width: 48px;
+    height: 28px;
+    background-color: #ccc;
+    border-radius: 28px;
+    transition: 0.3s;
+}
+
+.tax-slider::before {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    top: 3px;
+    left: 3px;
+    transition: 0.3s;
+}
+
+.tax-checkbox:checked + .tax-slider {
+    background-color: #222;
+}
+
+.tax-checkbox:checked + .tax-slider::before {
+    transform: translateX(20px);
+}
+
 @media (max-width: 768px) {
-     .filter-wrapper {
-        flex: 0 0 100%;  
-        max-width: 100%;       
-    } 
-    .tax-toggle {
-        width: 100%;        
+    .top-bar {
+        flex-wrap: wrap;
+        padding: 0.75rem 0;
     }
+    
+    .filter-wrapper {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    #filters {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+    }
+    
     .scroll-btn {
         display: none;
     }
-} 
-
-@media (max-width: 768px) {
-    form.d-flex {
-        flex-direction: column;
-    }
-
-    .search-inp {
+    
+    .tax-toggle {
         width: 100%;
-    }
-
-    .search-btn {
-        width: 100%;
+        justify-content: flex-start;
         margin-top: 0.5rem;
     }
-}
-
-/* TAX INFO */
-.tax-info {
-    display: none;
 }

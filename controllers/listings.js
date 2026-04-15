@@ -1,9 +1,6 @@
 const Listing = require('../models/listing');
 const ExpressError = require('../utils/ExpressError');
 const cloudinary = require('../cloudConfig.js');
-// const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
-// const mapToken = process.env.MAP_TOKEN;
-// const geocodingClient = mbxGeocoding({ accessToken: mapToken });
 
 // Controller function for listing index route and filtering listings by category
 module.exports.index = async (req, res) => {
@@ -49,12 +46,6 @@ module.exports.createListing = async (req, res, next) => {
         throw new ExpressError('Invalid Listing Data', 400);
     }
 
-    // let response = await geocodingClient.forwardGeocode({
-    //     query: req.body.listing.location,
-    //     limit: 1
-    // })
-    //     .send();
-
     const newListing = new Listing(req.body.listing);
     newListing.owner = req.user._id;
 
@@ -76,10 +67,10 @@ module.exports.createListing = async (req, res, next) => {
         };
     }
     // TEMP default coordinates (Mumbai example)
-    // newListing.geometry = {
-    //     type: "Point",
-    //     coordinates: [72.8777, 19.0760] // [lng, lat]
-    // };
+    newListing.geometry = {
+        type: "Point",
+        coordinates: [72.8777, 19.0760] // [lng, lat]
+    };
     // newListing.geometry = response.body.features[0].geometry;
     await newListing.save();
     req.flash('success', 'New Listing Created Successfully!');
